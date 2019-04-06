@@ -1,8 +1,6 @@
 #include "LOLIN_EPD.h"
 #include "LOLIN_IL3897.h"
 
-#define ALLSCREEN_GRAGHBYTES 4000
-
 ///////////////////////////////////////////////////
 
 
@@ -169,8 +167,6 @@ const unsigned char LUT_DATA_part[] PROGMEM = {
     0x30,
     0x0A,
 };
-
-#define BUSY_WAIT 1000
 
 /*!
     @brief constructor if using on-chip RAM and software SPI

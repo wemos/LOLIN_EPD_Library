@@ -1,6 +1,9 @@
 #ifndef __LOLIN_IL3897_H
 #define __LOLIN_IL3897_H
 
+#define ALLSCREEN_GRAGHBYTES 4000
+#define BUSY_WAIT 2000
+
 #ifdef __AVR__
   #include <avr/pgmspace.h>
 #elif defined(ESP8266) || defined(ESP32)
@@ -24,12 +27,12 @@ class LOLIN_IL3897 : public LOLIN_EPD {
 	  LOLIN_IL3897(int width, int height, int8_t DC, int8_t RST, int8_t CS, int8_t BUSY = -1);
 
 	void begin(bool reset=true);
-	
+
 	void drawPixel(int16_t x, int16_t y, uint16_t color);
-	
+
 	void display();
 	void update();
-	
+
 	void clearBuffer();
 	void clearDisplay();
 
