@@ -107,5 +107,6 @@ private:
 };
 
 #include "LOLIN_IL3897.h"
+#include "LOLIN_UC8151D.h"
 
 #endif
