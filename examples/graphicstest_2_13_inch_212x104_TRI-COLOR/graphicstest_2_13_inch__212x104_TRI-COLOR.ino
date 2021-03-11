@@ -21,9 +21,8 @@ LOLIN_UC8151D EPD(212, 104, EPD_DC, EPD_RST, EPD_CS, EPD_BUSY); //hardware SPI
 // #define EPD_CLK D5
 // LOLIN_UC8151D EPD(212, 104, EPD_MOSI, EPD_CLK, EPD_DC, EPD_RST, EPD_CS, EPD_BUSY); //IO
 
-
-
-void setup(void) {
+void setup(void)
+{
   Serial.begin(115200);
   Serial.print("Hello! EPD Test");
 
@@ -36,77 +35,89 @@ void setup(void) {
   EPD.fillScreen(EPD_WHITE);
   testdrawtext("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur adipiscing ante sed nibh tincidunt feugiat. Maecenas enim massa, fringilla sed malesuada et, malesuada sit amet turpis. Sed porttitor neque ut ante pretium vitae malesuada nunc bibendum. Nullam aliquet ultrices massa eu hendrerit. Ut sed nisi lorem. In vestibulum purus a tortor imperdiet posuere. ", EPD_BLACK);
 
+  delay(5000);
   // epd print function!
   epdPrintTest();
-
+  delay(5000);
   // a single pixel
   EPD.clearBuffer();
-  EPD.drawPixel(EPD.width()/2, EPD.height()/2, EPD_BLACK);
+  EPD.drawPixel(EPD.width() / 2, EPD.height() / 2, EPD_BLACK);
 
   testtriangles();
-  
+  delay(5000);
   // line draw test
   testlines(EPD_BLACK);
-
+  delay(5000);
   // optimized lines
   testfastlines(EPD_BLACK, EPD_RED);
-
+  delay(5000);
   testdrawrects(EPD_RED);
-
+  delay(5000);
   testfillrects(EPD_BLACK, EPD_RED);
-
+  delay(5000);
   EPD.fillScreen(EPD_WHITE);
   testfillcircles(10, EPD_RED);
   testdrawcircles(10, EPD_BLACK);
-
+  delay(5000);
   testroundrects();
-
+  delay(5000);
   mediabuttons();
-
+  delay(5000);
   Serial.println("done");
 }
 
-void loop() {
+void loop()
+{
   delay(500);
 }
 
-void testlines(uint16_t color) {
+void testlines(uint16_t color)
+{
   EPD.clearBuffer();
   EPD.fillScreen(EPD_WHITE);
-  for (int16_t x=0; x < EPD.width(); x+=6) {
-    EPD.drawLine(0, 0, x, EPD.height()-1, color);
+  for (int16_t x = 0; x < EPD.width(); x += 6)
+  {
+    EPD.drawLine(0, 0, x, EPD.height() - 1, color);
   }
-  for (int16_t y=0; y < EPD.height(); y+=6) {
-    EPD.drawLine(0, 0, EPD.width()-1, y, color);
-  }
-
-  EPD.fillScreen(EPD_WHITE);
-  for (int16_t x=0; x < EPD.width(); x+=6) {
-    EPD.drawLine(EPD.width()-1, 0, x, EPD.height()-1, color);
-  }
-  for (int16_t y=0; y < EPD.height(); y+=6) {
-    EPD.drawLine(EPD.width()-1, 0, 0, y, color);
+  for (int16_t y = 0; y < EPD.height(); y += 6)
+  {
+    EPD.drawLine(0, 0, EPD.width() - 1, y, color);
   }
 
   EPD.fillScreen(EPD_WHITE);
-  for (int16_t x=0; x < EPD.width(); x+=6) {
-    EPD.drawLine(0, EPD.height()-1, x, 0, color);
+  for (int16_t x = 0; x < EPD.width(); x += 6)
+  {
+    EPD.drawLine(EPD.width() - 1, 0, x, EPD.height() - 1, color);
   }
-  for (int16_t y=0; y < EPD.height(); y+=6) {
-    EPD.drawLine(0, EPD.height()-1, EPD.width()-1, y, color);
+  for (int16_t y = 0; y < EPD.height(); y += 6)
+  {
+    EPD.drawLine(EPD.width() - 1, 0, 0, y, color);
   }
 
   EPD.fillScreen(EPD_WHITE);
-  for (int16_t x=0; x < EPD.width(); x+=6) {
-    EPD.drawLine(EPD.width()-1, EPD.height()-1, x, 0, color);
+  for (int16_t x = 0; x < EPD.width(); x += 6)
+  {
+    EPD.drawLine(0, EPD.height() - 1, x, 0, color);
   }
-  for (int16_t y=0; y < EPD.height(); y+=6) {
-    EPD.drawLine(EPD.width()-1, EPD.height()-1, 0, y, color);
+  for (int16_t y = 0; y < EPD.height(); y += 6)
+  {
+    EPD.drawLine(0, EPD.height() - 1, EPD.width() - 1, y, color);
+  }
+
+  EPD.fillScreen(EPD_WHITE);
+  for (int16_t x = 0; x < EPD.width(); x += 6)
+  {
+    EPD.drawLine(EPD.width() - 1, EPD.height() - 1, x, 0, color);
+  }
+  for (int16_t y = 0; y < EPD.height(); y += 6)
+  {
+    EPD.drawLine(EPD.width() - 1, EPD.height() - 1, 0, y, color);
   }
   EPD.display();
 }
 
-void testdrawtext(char *text, uint16_t color) {
+void testdrawtext(char *text, uint16_t color)
+{
   EPD.clearBuffer();
   EPD.setCursor(0, 0);
   EPD.setTextColor(color);
@@ -115,101 +126,122 @@ void testdrawtext(char *text, uint16_t color) {
   EPD.display();
 }
 
-void testfastlines(uint16_t color1, uint16_t color2) {
+void testfastlines(uint16_t color1, uint16_t color2)
+{
   EPD.clearBuffer();
   EPD.fillScreen(EPD_WHITE);
-  for (int16_t y=0; y < EPD.height(); y+=5) {
+  for (int16_t y = 0; y < EPD.height(); y += 5)
+  {
     EPD.drawFastHLine(0, y, EPD.width(), color1);
   }
-  for (int16_t x=0; x < EPD.width(); x+=5) {
+  for (int16_t x = 0; x < EPD.width(); x += 5)
+  {
     EPD.drawFastVLine(x, 0, EPD.height(), color2);
   }
   EPD.display();
 }
 
-void testdrawrects(uint16_t color) {
+void testdrawrects(uint16_t color)
+{
   EPD.clearBuffer();
   EPD.fillScreen(EPD_WHITE);
-  for (int16_t x=0; x < EPD.width(); x+=6) {
-    EPD.drawRect(EPD.width()/2 -x/2, EPD.height()/2 -x/2 , x, x, color);
+  for (int16_t x = 0; x < EPD.width(); x += 6)
+  {
+    EPD.drawRect(EPD.width() / 2 - x / 2, EPD.height() / 2 - x / 2, x, x, color);
   }
   EPD.display();
 }
 
-void testfillrects(uint16_t color1, uint16_t color2) {
+void testfillrects(uint16_t color1, uint16_t color2)
+{
   EPD.clearBuffer();
   EPD.fillScreen(EPD_WHITE);
-  for (int16_t x=EPD.width()-1; x > 6; x-=6) {
-    EPD.fillRect(EPD.width()/2 -x/2, EPD.height()/2 -x/2 , x, x, color1);
-    EPD.drawRect(EPD.width()/2 -x/2, EPD.height()/2 -x/2 , x, x, color2);
+  for (int16_t x = EPD.width() - 1; x > 6; x -= 6)
+  {
+    EPD.fillRect(EPD.width() / 2 - x / 2, EPD.height() / 2 - x / 2, x, x, color1);
+    EPD.drawRect(EPD.width() / 2 - x / 2, EPD.height() / 2 - x / 2, x, x, color2);
   }
   EPD.display();
 }
 
-void testfillcircles(uint8_t radius, uint16_t color) {
+void testfillcircles(uint8_t radius, uint16_t color)
+{
   EPD.clearBuffer();
-  for (int16_t x=radius; x < EPD.width(); x+=radius*2) {
-    for (int16_t y=radius; y < EPD.height(); y+=radius*2) {
+  for (int16_t x = radius; x < EPD.width(); x += radius * 2)
+  {
+    for (int16_t y = radius; y < EPD.height(); y += radius * 2)
+    {
       EPD.fillCircle(x, y, radius, color);
     }
   }
   EPD.display();
 }
 
-void testdrawcircles(uint8_t radius, uint16_t color) {
+void testdrawcircles(uint8_t radius, uint16_t color)
+{
   EPD.clearBuffer();
-  for (int16_t x=0; x < EPD.width()+radius; x+=radius*2) {
-    for (int16_t y=0; y < EPD.height()+radius; y+=radius*2) {
+  for (int16_t x = 0; x < EPD.width() + radius; x += radius * 2)
+  {
+    for (int16_t y = 0; y < EPD.height() + radius; y += radius * 2)
+    {
       EPD.drawCircle(x, y, radius, color);
     }
   }
   EPD.display();
 }
 
-void testtriangles() {
+void testtriangles()
+{
   EPD.clearBuffer();
   EPD.fillScreen(EPD_WHITE);
   int color = EPD_BLACK;
   int t;
-  int w = EPD.width()/2;
-  int x = EPD.height()-1;
+  int w = EPD.width() / 2;
+  int x = EPD.height() - 1;
   int y = 0;
   int z = EPD.width();
-  for(t = 0 ; t <= 15; t++) {
+  for (t = 0; t <= 15; t++)
+  {
     EPD.drawTriangle(w, y, y, x, z, x, color);
-    x-=4;
-    y+=4;
-    z-=4;
-    if(t == 8) color = EPD_RED;
+    x -= 4;
+    y += 4;
+    z -= 4;
+    if (t == 8)
+      color = EPD_RED;
   }
   EPD.display();
 }
 
-void testroundrects() {
+void testroundrects()
+{
   EPD.clearBuffer();
   EPD.fillScreen(EPD_WHITE);
   int color = EPD_BLACK;
   int i;
   int t;
-  for(t = 0 ; t <= 4; t+=1) {
+  for (t = 0; t <= 4; t += 1)
+  {
     int x = 0;
     int y = 0;
-    int w = EPD.width()-2;
-    int h = EPD.height()-2;
-    for(i = 0 ; i <= 16; i+=1) {
+    int w = EPD.width() - 2;
+    int h = EPD.height() - 2;
+    for (i = 0; i <= 16; i += 1)
+    {
       EPD.drawRoundRect(x, y, w, h, 5, color);
-      x+=2;
-      y+=3;
-      w-=4;
-      h-=6;
-      if(i == 7) color = EPD_RED;
+      x += 2;
+      y += 3;
+      w -= 4;
+      h -= 6;
+      if (i == 7)
+        color = EPD_RED;
     }
     color = EPD_BLACK;
   }
   EPD.display();
 }
 
-void epdPrintTest() {
+void epdPrintTest()
+{
   EPD.clearBuffer();
   EPD.setCursor(2, 0);
   EPD.fillScreen(EPD_WHITE);
@@ -234,7 +266,8 @@ void epdPrintTest() {
   EPD.display();
 }
 
-void mediabuttons() {
+void mediabuttons()
+{
   EPD.clearBuffer();
   // play
   EPD.fillScreen(EPD_WHITE);

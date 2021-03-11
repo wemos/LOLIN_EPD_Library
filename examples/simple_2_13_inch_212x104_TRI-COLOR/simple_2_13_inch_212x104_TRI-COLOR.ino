@@ -23,9 +23,8 @@ LOLIN_UC8151D EPD(212, 104, EPD_DC, EPD_RST, EPD_CS, EPD_BUSY); //hardware SPI
 
 void setup()
 {
-  EPD.begin();
-  EPD.clearBuffer();
-  EPD.setTextColor(EPD_BLACK);
+  
+
 
 }
 
@@ -33,6 +32,8 @@ void loop()
 {
   for (uint8_t i = 0; i < 4; i++)
   {
+    EPD.begin();
+
     EPD.setRotation(i);
     EPD.clearBuffer();
     EPD.setTextSize(1);
@@ -44,6 +45,8 @@ void loop()
     EPD.setTextSize(2);
     EPD.println("I'm red!");
     EPD.display();
+
+    EPD.deepSleep();
 
     delay(2000);
   }
