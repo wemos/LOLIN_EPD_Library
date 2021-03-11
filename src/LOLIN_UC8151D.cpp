@@ -229,3 +229,16 @@ void LOLIN_UC8151D::deepSleep()
     sendCmd(0X07); //deep sleep
     sendData(0xA5);
 }
+
+void LOLIN_UC8151D::fillbuffer(const unsigned char *black_image, const unsigned char *red_image)
+{
+    for (int i = 0; i < bw_bufsize; i++)
+    {
+        bw_buf[i] = pgm_read_byte(&black_image[i]);
+    }
+
+    for (int i = 0; i < red_bufsize; i++)
+    {
+        red_buf[i] = pgm_read_byte(&red_image[i]);
+    }
+}
