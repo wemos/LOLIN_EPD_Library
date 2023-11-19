@@ -130,7 +130,7 @@ void LOLIN_EPD::sendCmd(uint8_t c)
   dcLow();
   csLow();
 
-  uint8_t data = fastSPIwrite(c);
+  fastSPIwrite(c);
 
   csHigh();
 }

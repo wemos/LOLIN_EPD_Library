@@ -228,7 +228,6 @@ LOLIN_IL3897::LOLIN_IL3897(int width, int height, int8_t DC, int8_t RST, int8_t 
 /**************************************************************************/
 void LOLIN_IL3897::begin(bool reset)
 {
-    uint8_t buf[5];
     LOLIN_EPD::begin(reset);
 
     readBusy();
